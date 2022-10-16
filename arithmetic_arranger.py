@@ -1,3 +1,9 @@
+'''
+library imoport
+'''
+
+import re
+
 ''' (function)
 maximum_characters(["32", "+", "8"]) => 2
 '''
@@ -30,6 +36,50 @@ arithmetic_arranger(["32 + 8", "42 - 5"]) =>
 '''
 
 def arithmetic_arranger(problems):
+
+  '''
+  Initialize return value
+  '''
+  
+  arranged_problems = ''
+
+  '''
+  Too many problems
+  '''
+  
+  if len(problems) > 5:
+    arranged_problems = 'Error: Too many problems.'
+    return arranged_problems
+  
+  '''
+  Operator must be + or -.
+  '''
+
+  for i in range(len(problems)):
+    if '*' in problems[i] or '/' in problems[i]:
+      arranged_problems = "Error: Operator must be '+' or '-'."
+      return arranged_problems
+
+  '''
+  Numbers cannot be more than four digits.
+  '''
+  
+  for i in range(len(problems)):
+    temp = problems[i].split()
+    if len(temp[0]) > 4 or len(temp[2]) > 4:
+      arranged_problems = 'Error: Numbers cannot be more than four digits.'
+      return arranged_problems
+
+  '''
+  Numbers must only contain digits.
+  '''
+  
+  pattern = re.compile(r'[^0-9]')
+  for i in range(len(problems)):
+    temp = problems[i].split()
+    if pattern.search(temp[0]) or pattern.search(temp[2]):
+      arranged_problems = 'Error: Numbers must only contain digits.'
+      return arranged_problems
   
   '''
   problems == [
@@ -111,8 +161,6 @@ def arithmetic_arranger(problems):
     ["__37", "__37"],
   ]
   '''
-  
-  arranged_problems = ''
   
   for i in range(len(result)):
     separater = ' ' * 4
