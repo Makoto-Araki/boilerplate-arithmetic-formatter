@@ -28,15 +28,15 @@ def result_added(strings):
   return result
 
 ''' (main function)
-arithmetic_arranger(["32 + 8", "42 - 5"]) =>
+arithmetic_arranger(["32 + 8", "42 - 5"], True) =>
   32      42
 +  8    -  5
 ----    ----
   40      37
 '''
 
-def arithmetic_arranger(problems):
-
+def arithmetic_arranger(*problems):
+  
   '''
   Initialize return value
   '''
@@ -47,7 +47,7 @@ def arithmetic_arranger(problems):
   Too many problems
   '''
   
-  if len(problems) > 5:
+  if len(problems[0]) > 5:
     arranged_problems = 'Error: Too many problems.'
     return arranged_problems
   
@@ -55,8 +55,8 @@ def arithmetic_arranger(problems):
   Operator must be + or -.
   '''
 
-  for i in range(len(problems)):
-    if '*' in problems[i] or '/' in problems[i]:
+  for i in range(len(problems[0])):
+    if '*' in problems[0][i] or '/' in problems[0][i]:
       arranged_problems = "Error: Operator must be '+' or '-'."
       return arranged_problems
 
@@ -64,8 +64,8 @@ def arithmetic_arranger(problems):
   Numbers cannot be more than four digits.
   '''
   
-  for i in range(len(problems)):
-    temp = problems[i].split()
+  for i in range(len(problems[0])):
+    temp = problems[0][i].split()
     if len(temp[0]) > 4 or len(temp[2]) > 4:
       arranged_problems = 'Error: Numbers cannot be more than four digits.'
       return arranged_problems
@@ -75,22 +75,22 @@ def arithmetic_arranger(problems):
   '''
   
   pattern = re.compile(r'[^0-9]')
-  for i in range(len(problems)):
-    temp = problems[i].split()
+  for i in range(len(problems[0])):
+    temp = problems[0][i].split()
     if pattern.search(temp[0]) or pattern.search(temp[2]):
       arranged_problems = 'Error: Numbers must only contain digits.'
       return arranged_problems
   
   '''
-  problems == [
+  problems[0] == [
     "32 + 8",
     "42 - 5",
   ]
   '''
   
   input = []
-  for i in range(len(problems)):
-    input.append(problems[i].split())
+  for i in range(len(problems[0])):
+    input.append(problems[0][i].split())
   
   '''
   input == [
@@ -164,15 +164,26 @@ def arithmetic_arranger(problems):
   
   for i in range(len(result)):
     separater = ' ' * 4
-    if i == 3: break
-    arranged_problems += separater.join(result[i]) + '\n'
-  
-  '''
-  arranged_problems == 
-    "  32      42\n" +
-    "+  8    -  5\n" +
-    "----    ----\n" +
-    "  37      37\n" => Delete the trailing newline code
-  '''
-  
+    if len(problems) == 1:
+      if i == 3: break
+      arranged_problems += separater.join(result[i]) + '\n'
+      
+      '''
+      arranged_problems == 
+        "  32      42\n" +
+        "+  8    -  5\n" +
+        "----    ----\n" => Delete the trailing newline code
+      '''
+      
+    else:
+      arranged_problems += separater.join(result[i]) + '\n'
+      
+      '''
+      arranged_problems == 
+        "  32      42\n" +
+        "+  8    -  5\n" +
+        "----    ----\n" +
+        "  37      37\n" => Delete the trailing newline code
+      '''
+    
   return arranged_problems[:-1]
