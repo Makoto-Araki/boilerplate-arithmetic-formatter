@@ -1,11 +1,17 @@
-# returns the maximum number of strings in a string list
+''' (function)
+maximum_characters(["32", "+", "8"]) => 2
+'''
+
 def maximum_characters(strings):
   if len(strings[0]) > len(strings[2]):
     return len(strings[0])
   else:
     return len(strings[2])
 
-# calculation result added to list
+''' (function)
+result_added(["32", "+", "8"]) => ["32", "+", "8", "40"]
+'''
+
 def result_added(strings):
   result = strings
   if strings[1] == '+':
@@ -15,11 +21,18 @@ def result_added(strings):
   result.append(str(calculation))
   return result
 
-# main function
+''' (main function)
+arithmetic_arranger(["32 + 8", "42 - 5"]) =>
+  32      42
++  8    -  5
+----    ----
+  40      37
+'''
+
 def arithmetic_arranger(problems):
   
   '''
-  problems = [
+  problems == [
     "32 + 8",
     "42 - 5",
   ]
@@ -30,7 +43,7 @@ def arithmetic_arranger(problems):
     input.append(problems[i].split())
   
   '''
-  input = [
+  input == [
     ["32", "+", "8"],
     ["42", "-", "5"],
   ]
@@ -41,7 +54,7 @@ def arithmetic_arranger(problems):
     terms.append(result_added(input[i]))
   
   '''
-  terms = [
+  terms == [
     ["32", "+", "8", "40"],
     ["42", "-", "5", "37"],
   ]
@@ -52,7 +65,7 @@ def arithmetic_arranger(problems):
     terms[i].insert(3, '-' * maximum)
     
     '''
-    terms = [
+    terms == [
       ["32", "+", "8", "----", "40"],
       ["42", "-", "5", "----", "37"],
     ]
@@ -64,8 +77,8 @@ def arithmetic_arranger(problems):
       if j == 3: continue
       terms[i][j] = terms[i][j].rjust(maximum, ' ')
     
-    ''' (blank = "_")
-    terms = [
+    ''' (blank == "_")
+    terms == [
       ["__32", "+", "8", "----", "__40"],
       ["__42", "-", "5", "----", "__37"],
     ]
@@ -77,8 +90,8 @@ def arithmetic_arranger(problems):
     del terms[i][1:3]
     terms[i].insert(1, backup1 + blank + backup2)
     
-    ''' (blank = "_")
-    terms = [
+    ''' (blank == "_")
+    terms == [
       ["__32", "+__8", "----", "__40"],
       ["__42", "-__5", "----", "__37"],
     ]
@@ -90,8 +103,8 @@ def arithmetic_arranger(problems):
     for j in range(len(terms[i])):
       result[j].append(terms[i][j])
   
-  ''' (blank = "_")
-  result = [
+  ''' (blank == "_")
+  result == [
     ["__32", "__42"],
     ["+__8", "-__5"],
     ["----", "----"],
@@ -107,7 +120,7 @@ def arithmetic_arranger(problems):
     arranged_problems += separater.join(result[i]) + '\n'
   
   '''
-  arranged_problems = 
+  arranged_problems == 
     "  32      42\n" +
     "+  8    -  5\n" +
     "----    ----\n" +
