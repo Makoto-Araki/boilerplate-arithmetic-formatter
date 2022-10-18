@@ -78,8 +78,8 @@ def arithmetic_arranger(*problems):
     for i in range(len(problems[0])):
         temp = problems[0][i].split()
         if pattern.search(temp[0]) or pattern.search(temp[2]):
-          arranged_problems = 'Error: Numbers must only contain digits.'
-          return arranged_problems
+            arranged_problems = 'Error: Numbers must only contain digits.'
+            return arranged_problems
   
     '''
     problems[0] == [
