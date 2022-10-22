@@ -3,9 +3,9 @@ from pytest import main
 
 from arithmetic_arranger import arithmetic_arranger
 
-
-print(arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"]))
-
+'''
+print(arithmetic_arranger(["45 + 43", "23 - 12"], True))
+'''
 
 # Run unit tests automatically
 main(['-vv'])
